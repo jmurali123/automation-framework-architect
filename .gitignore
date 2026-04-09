@@ -1,0 +1,12 @@
+target/
+
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# OS Files
+.DS_Store
+Thumbs.db
