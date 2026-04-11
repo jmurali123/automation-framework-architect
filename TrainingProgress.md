@@ -21,7 +21,9 @@
 
 ## 🔄 Next
 
-### Day 13 — Authentication
-- Basic Auth
-- Bearer Token
-- OAuth2
+
+### Day 13 ✅
+- Basic Auth — preemptive vs challenge response
+- Bearer Token — oauth2() method
+- Dynamic token generation — @BeforeClass
+- ThreadLocal concept for parallel tests
