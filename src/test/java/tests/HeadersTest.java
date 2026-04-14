@@ -1,3 +1,6 @@
+package tests;
+
+import constants.Constants;
 import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -11,7 +14,7 @@ public class HeadersTest {
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts/1")
+                .get(Constants.JSONPLACEHOLDER_BASE_URI+"/posts/1")
                 .then()
                 .statusCode(200)
                 .header("Content-Type", containsString("application/json"))
@@ -23,7 +26,7 @@ public class HeadersTest {
         given()
                 .queryParam("userId",1)
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts")
+                .get(Constants.JSONPLACEHOLDER_BASE_URI+"/posts")
                 .then()
                 .statusCode(200)
                 .body("$",hasSize(10))
@@ -35,7 +38,7 @@ public class HeadersTest {
         given()
                 .queryParam("postId",1)
                 .when()
-                .get("https://jsonplaceholder.typicode.com/comments")
+                .get(Constants.JSONPLACEHOLDER_BASE_URI+"/comments")
                 .then()
                 .statusCode(200)
                 .body("$",hasSize(5))

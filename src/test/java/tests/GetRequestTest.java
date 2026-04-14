@@ -1,19 +1,19 @@
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
-import org.testng.Assert;
+package tests;
+
+import base.BaseTest;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class GetRequestTest {
+public class GetRequestTest extends BaseTest {
     @Test
     public void getUserTest(){
-        given()
+        given().spec(reqSpec)
                 .when()
-                .get("https://jsonplaceholder.typicode.com/users/1")
+                .get("/users/1")
                 .then()
-                .statusCode(200)
+                .spec(resSpec)
                 .body("name", equalTo("Leanne Graham"))
                 .body("email", equalTo("Sincere@april.biz"))
                 .body("address.city", equalTo("Gwenborough"))

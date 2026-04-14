@@ -1,3 +1,6 @@
+package tests;
+
+import constants.Constants;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
@@ -15,7 +18,7 @@ public class MultipartAndXMLTest {
     public void setUp(){
          requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.XML)
-                .setBaseUri("https://postman-echo.com")
+                .setBaseUri(Constants.POSTMAN_ECHO_BASE_URI)
                 .build();
     }
     @Test

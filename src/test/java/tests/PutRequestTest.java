@@ -1,10 +1,13 @@
+package tests;
+
+import base.BaseTest;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class PutRequestTest {
+public class PutRequestTest extends BaseTest {
     @Test
     public void updatePostTest() {
 
@@ -16,31 +19,30 @@ public class PutRequestTest {
                 "}";
 
         given()
-                .contentType(ContentType.JSON)
+                .spec(reqSpec)
                 .body(requestBody)
                 .when()
-                .put("https://jsonplaceholder.typicode.com/posts/1")
-                .then()
-                .statusCode(200)
+                .put("/posts/1")
+                .then().spec(resSpec)
                 .body("id", equalTo(1))
                 .body("title", equalTo("Updated Title"))
                 .body("body", equalTo("Updated Body"));
     }
 
     @Test
-    public void updateUserTest(){
+    public void updateUserTest() {
         String requestbody="{\n" +
                 "  \"id\": 2,\n" +
                 "  \"name\": \"Updated Name\",\n" +
                 "  \"email\": \"updated@gmail.com\",\n" +
                 "  \"username\": \"updateduser\"\n" +
                 "}";
-        given().contentType(ContentType.JSON)
+        given().spec(reqSpec)
                 .body(requestbody)
                 .when()
-                .put("https://jsonplaceholder.typicode.com/posts/2")
+                .put("/posts/2")
                 .then()
-                .statusCode(200)
+                .spec(resSpec)
                 .body("name",equalTo("Updated Name"))
                 .body("email", equalTo("updated@gmail.com"));
     }

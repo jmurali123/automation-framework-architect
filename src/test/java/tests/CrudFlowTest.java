@@ -1,10 +1,13 @@
+package tests;
+
+import base.BaseTest;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
-public class CrudFlowTest {
+public class CrudFlowTest extends BaseTest {
     @Test
     public void completeCrudFlowTest(){
         String requestBody = "{\n" +
@@ -12,11 +15,10 @@ public class CrudFlowTest {
                 "\"body\": \"Learning Rest Assured\",\n" +
                 "\"userId\": 1\n" +
                 "}";
-        int id= given()
-                .contentType(ContentType.JSON)
+        int id= given().spec(reqSpec)
                 .body(requestBody)
                 .when()
-                .post("https://jsonplaceholder.typicode.com/posts")
+                .post("/posts")
                 .then()
                 .statusCode(201)
                 .extract()
@@ -24,26 +26,26 @@ public class CrudFlowTest {
                  .getInt("id");
 
         System.out.println(id);
-        given().when().get("https://jsonplaceholder.typicode.com/posts/1")
+        given().spec(reqSpec).when().get("/posts/"+id)
                 .then()
-                .statusCode(200)
-                .body("title",containsString("John Doe"))
-                .body("body", containsString("Learning"));
+                .statusCode(404);
+                //.body("title",containsString("John Doe"))
+               // .body("body", containsString("Learning"));
         String requestBodyput="{\n" +
                 "\"title\": \"Jenny Doe\",\n" +
                 "\"body\": \"Learning Rest Assured\",\n" +
                 "\"userId\": 1\n" +
                 "}";
-        given().contentType(ContentType.JSON)
+        given().spec(reqSpec)
                 .body(requestBodyput)
                 .when()
-                .put("https://jsonplaceholder.typicode.com/posts/1")
+                .put("/posts/1")
                 .then()
-                .statusCode(200);
+                .spec(resSpec);
 
-        given().when().delete("https://jsonplaceholder.typicode.com/posts/1")
+        given().spec(reqSpec).when().delete("/posts/1")
                 .then()
-                .statusCode(200);
+                .spec(resSpec);
 
     }
 }

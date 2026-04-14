@@ -1,3 +1,6 @@
+package tests;
+
+import base.BaseTest;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -11,45 +14,30 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class RequestSpecificationTest {
-    RequestSpecification requestSpec;
-    ResponseSpecification responseSpec;
+public class RequestSpecificationTest extends BaseTest {
 
-    @BeforeClass
-    public void setup(){
-        requestSpec= new RequestSpecBuilder()
-                .setBaseUri("https://jsonplaceholder.typicode.com")
-                        .setContentType(ContentType.JSON)
-                                .addHeader("Accept","application/json")
-                .build();
-
-        responseSpec=new ResponseSpecBuilder()
-                .expectContentType(ContentType.JSON)
-                .expectStatusCode(200)
-                .build();
-    }
 
     @Test
     public void getPostWithSpecTest(){
         given()
-                .spec(requestSpec)
+                .spec(reqSpec)
                 .when()
                 .get("/posts/1")
                 .then()
                 .log().ifValidationFails()
-                .spec(responseSpec)
+                .spec(resSpec)
                 .body("id", equalTo(1))
                 .body("title", notNullValue());
     }
     @Test
     public void getPostsWithSpecTest(){
         given()
-                .spec(requestSpec)
+                .spec(reqSpec)
                 .when()
                 .get("/posts")
                 .then()
                 .log().ifValidationFails()
-                .spec(responseSpec)
+                .spec(resSpec)
                 .body("$",hasSize(100))
                 .body("userId", everyItem(notNullValue()));
     }
@@ -57,12 +45,12 @@ public class RequestSpecificationTest {
     @Test
     public void getUserWithSpecTest()
     {
-        given().spec(requestSpec)
+        given().spec(reqSpec)
                 .when()
                 .get("/users/1")
                 .then()
                 .log().ifValidationFails()
-                .spec(responseSpec)
+                .spec(resSpec)
                 .body("id",equalTo(1))
                 .body("name", notNullValue());
     }
@@ -73,7 +61,7 @@ public class RequestSpecificationTest {
         post.setUserId(1);
         post.setBody("Test Body");
         post.setTitle("Test Post");
-        given().spec(requestSpec)
+        given().spec(reqSpec)
                 .body(post)
                 .when()
                 .post("/posts")
@@ -86,7 +74,7 @@ public class RequestSpecificationTest {
 
     @Test
     public void deletePostWithSpecTest(){
-        given().spec(requestSpec)
+        given().spec(reqSpec)
                 .when()
                 .delete("/posts/1")
                 .then()
@@ -96,13 +84,13 @@ public class RequestSpecificationTest {
     @Test
     public void loggingTest(){
         given()
-                .spec(requestSpec)
+                .spec(reqSpec)
                 .log().all()
                 .when()
                 .get("/posts/1")
                 .then()
                 .log().ifValidationFails()
-                .spec(responseSpec)
+                .spec(resSpec)
                 .body("id",equalTo(1));
     }
 }

@@ -27,3 +27,10 @@
 - Bearer Token — oauth2() method
 - Dynamic token generation — @BeforeClass
 - ThreadLocal concept for parallel tests
+
+### Day 14 ✅
+- XML request with JSON response validation
+- Multipart file upload
+- Filters — filters.LoggingFilter
+- Separation of concerns concept
+- Cross cutting concerns

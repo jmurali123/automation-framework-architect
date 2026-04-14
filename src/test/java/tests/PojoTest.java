@@ -1,3 +1,6 @@
+package tests;
+
+import base.BaseTest;
 import io.restassured.http.ContentType;
 import models.Post;
 import models.User;
@@ -5,7 +8,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class PojoTest {
+public class PojoTest extends BaseTest {
 
     @Test
     public void createPostWithPojoTest() {
@@ -17,10 +20,10 @@ public class PojoTest {
         post.setBody("This is created using POJO!");
 
         given()
-                .contentType(ContentType.JSON)
+                .spec(reqSpec)
                 .body(post)
                 .when()
-                .post("https://jsonplaceholder.typicode.com/posts")
+                .post("/posts")
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("My POJO Post"))
@@ -31,10 +34,11 @@ public class PojoTest {
     @Test
     public void getPostAsPojoTest(){
         Post post = given()
+                .spec(reqSpec)
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts/1")
+                .get("/posts/1")
                 .then()
-                .statusCode(200)
+                .spec(resSpec)
                 .extract()
                 .as(Post.class);
 
@@ -46,9 +50,10 @@ public class PojoTest {
     @Test
     public void getUserAsPojoTest(){
         User user =  given()
+                .spec(reqSpec)
                 .when()
-                .get("https://jsonplaceholder.typicode.com/users/1")
-                .then().statusCode(200).extract().as(User.class);
+                .get("/users/1")
+                .then().spec(resSpec).extract().as(User.class);
         System.out.println("user name "+user.getName());
         System.out.println("user email"+user.getEmail());
     }

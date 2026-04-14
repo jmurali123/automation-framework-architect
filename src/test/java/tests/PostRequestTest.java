@@ -1,3 +1,6 @@
+package tests;
+
+import base.BaseTest;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
@@ -5,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class PostRequestTest {
+public class PostRequestTest extends BaseTest {
     @Test
     public void createPostTest(){
         String requestBody = "{\n" +
@@ -14,11 +17,10 @@ public class PostRequestTest {
                 "  \"userId\": 1\n" +
                 "}";
 
-        given()
-                .contentType(ContentType.JSON)
+        given().spec(reqSpec)
                 .body(requestBody)
                 .when()
-                .post("https://jsonplaceholder.typicode.com/posts")
+                .post("/posts")
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("My First Post"))
@@ -33,10 +35,10 @@ public class PostRequestTest {
                 "  \"email\": \"john@gmail.com\",\n" +
                 "  \"username\": \"johndoe\"\n" +
                 "}";
-        given().contentType(ContentType.JSON)
+        given().spec(reqSpec)
                 .body(requestBody)
                 .when()
-                .post("https://jsonplaceholder.typicode.com/users")
+                .post("/users")
                 .then()
                 .statusCode(201)
                 .body("name",equalTo("John Doe"))
@@ -52,11 +54,10 @@ public class PostRequestTest {
                 "  \"email\": \"john@gmail.com\",\n" +
                 "  \"username\": \"johndoe\"\n" +
                 "}";
-       int id= given()
-                .contentType(ContentType.JSON)
+       int id= given().spec(reqSpec)
                 .body(requestBody)
                 .when()
-                .post("https://jsonplaceholder.typicode.com/users")
+                .post("/users")
                 .then()
                 .statusCode(201)
                 .extract().jsonPath().getInt("id");
@@ -72,10 +73,10 @@ public class PostRequestTest {
                 "  \"userId\": 5\n" +
                 "}";
 
-        int id=given().contentType(ContentType.JSON)
+        int id=given().spec(reqSpec)
                 .body(requestBody)
                 .when()
-                .post("https://jsonplaceholder.typicode.com/posts")
+                .post("/posts")
                 .then()
                 .statusCode(201)
                 .extract()
