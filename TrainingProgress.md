@@ -34,3 +34,10 @@
 - Filters — filters.LoggingFilter
 - Separation of concerns concept
 - Cross cutting concerns
+
+### Day 15 ✅
+- Base Class — common setup
+- Constants — centralized URLs
+- Package structure — base, constants, filters, models, tests
+- Refactored all test classes to extend BaseTest
+- Protected access modifier — encapsulation
