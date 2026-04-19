@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class PostRequestTest extends BaseTest {
-    @Test
+    @Test(groups={"api", "sanity", "regression"})
     public void createPostTest(){
         String requestBody = "{\n" +
                 "  \"title\": \"My First Post\",\n" +
@@ -28,7 +28,7 @@ public class PostRequestTest extends BaseTest {
                 .body("id", notNullValue());
     }
 
-    @Test
+    @Test(groups={"api", "sanity", "regression"})
     public void createUserTest(){
         String requestBody="{\n" +
                 "  \"name\": \"John Doe\",\n" +
@@ -47,7 +47,7 @@ public class PostRequestTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups={"api", "sanity", "regression"})
     public void createPostAndValidateIdTest(){
         String requestBody="{\n" +
                 "  \"name\": \"John Doe\",\n" +
@@ -65,7 +65,7 @@ public class PostRequestTest extends BaseTest {
         System.out.println("Created User ID: " + id);
     }
 
-    @Test
+    @Test(groups={"api", "sanity", "regression"})
     public void createCustomPostTest(){
         String requestBody="{\n" +
                 "  \"title\": \"Murali\",\n" +

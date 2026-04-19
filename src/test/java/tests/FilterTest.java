@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 
 public class FilterTest extends BaseTest {
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void testLoggingFilter(){
         given().spec(reqSpec)
                 .when()

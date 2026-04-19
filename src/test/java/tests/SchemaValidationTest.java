@@ -25,7 +25,7 @@ public class SchemaValidationTest {
                 .body(matchesJsonSchemaInClasspath("users-schema.json"));
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void SchemaValidationTest(){
         given().when()
                 .get("https://jsonplaceholder.typicode.com/posts")

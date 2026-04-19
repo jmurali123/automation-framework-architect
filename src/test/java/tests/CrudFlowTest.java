@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
 public class CrudFlowTest extends BaseTest {
-    @Test
+    @Test(groups={"api", "sanity", "regression"})
     public void completeCrudFlowTest(){
         String requestBody = "{\n" +
                 "\"title\": \"John Doe\",\n" +

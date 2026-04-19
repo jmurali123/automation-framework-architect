@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class ArrayValidationTest extends BaseTest {
-    @Test
+    @Test(groups={"api", "regression"})
     public void getAllUsersTest() {
 
         given().spec(reqSpec)
@@ -24,7 +24,7 @@ public class ArrayValidationTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void getSingleUserTest(){
         given().spec(reqSpec).when().get("/users/1").then()
                 .spec(resSpec)
@@ -33,7 +33,7 @@ public class ArrayValidationTest extends BaseTest {
                 .body("address.zipcode",equalTo("92998-3874"));
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void getPostTest(){
         given().spec(reqSpec).when()
                 .get("/posts/1")
@@ -46,7 +46,7 @@ public class ArrayValidationTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void validateSpecificUsersTest(){
         given().spec(reqSpec).when()
                 .get("/users")
@@ -58,7 +58,7 @@ public class ArrayValidationTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void validateNestedFieldsTest(){
         given().spec(reqSpec).when().
                 get("/users")
@@ -69,7 +69,7 @@ public class ArrayValidationTest extends BaseTest {
                 .body("[2].address.geo.lat",equalTo("-68.6102"));
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void validateAllUsersTest(){
         given().spec(reqSpec).when()
                 .get("/users")
@@ -79,7 +79,7 @@ public class ArrayValidationTest extends BaseTest {
                 .body("[4].company.catchPhrase",notNullValue());
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void validateAllNamesTest(){
         given().spec(reqSpec).when().get("/users")
                 .then()

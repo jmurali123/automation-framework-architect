@@ -41,3 +41,12 @@
 - Package structure — base, constants, filters, models, tests
 - Refactored all test classes to extend BaseTest
 - Protected access modifier — encapsulation
+
+### Day 16 ✅
+- ConfigReader — reads config.properties
+- JSONUtils — readJsonFile() utility
+- UserValidator — Hard + Soft assertions
+- Validators package created
+- Static block — loads once into RAM
+- ClassLoader — finds resources automatically
+- Hard vs Soft assertions

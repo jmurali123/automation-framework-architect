@@ -8,7 +8,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class PutRequestTest extends BaseTest {
-    @Test
+    @Test( groups={"api", "sanity", "regression"})
     public void updatePostTest() {
 
         String requestBody = "{\n" +
@@ -29,7 +29,7 @@ public class PutRequestTest extends BaseTest {
                 .body("body", equalTo("Updated Body"));
     }
 
-    @Test
+    @Test( groups={"api", "sanity", "regression"})
     public void updateUserTest() {
         String requestbody="{\n" +
                 "  \"id\": 2,\n" +

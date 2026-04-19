@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.*;
 
 public class PojoTest extends BaseTest {
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void createPostWithPojoTest() {
 
         // Create request body using POJO
@@ -31,7 +31,7 @@ public class PojoTest extends BaseTest {
                 .body("id", notNullValue());
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void getPostAsPojoTest(){
         Post post = given()
                 .spec(reqSpec)
@@ -47,7 +47,7 @@ public class PojoTest extends BaseTest {
         System.out.println("Body: " + post.getBody());
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void getUserAsPojoTest(){
         User user =  given()
                 .spec(reqSpec)

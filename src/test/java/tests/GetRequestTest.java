@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class GetRequestTest extends BaseTest {
-    @Test
+    @Test(groups={"smoke","regression","api"})
     public void getUserTest(){
         given().spec(reqSpec)
                 .when()
@@ -27,4 +27,6 @@ public class GetRequestTest extends BaseTest {
 
 
     }
+
+
 }

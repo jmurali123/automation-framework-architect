@@ -1,5 +1,6 @@
 package tests;
 
+import base.BaseTest;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.BeforeClass;
@@ -7,13 +8,13 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class AuthenticationTest {
-    RequestSpecification reqSpec;
+public class AuthenticationTest extends BaseTest {
+    RequestSpecification authreqSpec;
     String token;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void setUp(){
-        reqSpec=new RequestSpecBuilder()
+        authreqSpec=new RequestSpecBuilder()
                 .setBaseUri("https://postman-echo.com")
                 .build();
         token="mySecretToken123";
@@ -22,7 +23,7 @@ public class AuthenticationTest {
 
     @Test
     public void basicAuthTest(){
-        given().spec(reqSpec)
+        given().spec(authreqSpec)
                 .auth().preemptive().basic("postman","password").log().all()
                 .when()
                 .get("/headers")
@@ -31,9 +32,9 @@ public class AuthenticationTest {
 
     }
 
-    @Test
+    @Test(groups={"smoke", "api", "regression"})
     public void bearerTokenTest(){
-        given().spec(reqSpec)
+        given().spec(authreqSpec)
                 .auth().oauth2(token)
                 .when()
                 .get("/headers")

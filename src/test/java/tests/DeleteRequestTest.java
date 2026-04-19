@@ -16,7 +16,7 @@ public class DeleteRequestTest extends BaseTest {
                 .spec(resSpec);
     }
 
-    @Test
+    @Test (groups={"api", "sanity", "regression"})
     public void deleteAndVerifyTest(){
         given().spec(reqSpec).when()
                 .delete("/posts/5")

@@ -7,7 +7,7 @@ import static org.hamcrest.Matchers.*;
 
 public class HeadersTest {
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void customHeaderTest() {
 
         given()
@@ -21,7 +21,7 @@ public class HeadersTest {
                 .body("id", equalTo(1));
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void queryParamTest(){
         given()
                 .queryParam("userId",1)
@@ -33,7 +33,7 @@ public class HeadersTest {
                 .body("userId",everyItem(equalTo(1)));
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void multipleQueryParamTest(){
         given()
                 .queryParam("postId",1)
@@ -45,7 +45,7 @@ public class HeadersTest {
                 .body("postId",everyItem(equalTo(1)));
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void basicAuthTest() {
         given()
                 .auth()
@@ -58,7 +58,7 @@ public class HeadersTest {
                 .body("user", equalTo("admin"));
     }
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void bearerTokenTest(){
         given().header("Authorization","Bearer mytoken123")
                 .when()

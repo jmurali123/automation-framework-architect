@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 
 public class pathParamTest extends BaseTest {
 
-    @Test
+    @Test(groups={"api", "regression"})
     public void pathParam(){
 
         Map<String,Object> pathParams=new HashMap<String,Object>();
