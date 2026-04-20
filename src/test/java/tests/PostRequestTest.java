@@ -1,8 +1,12 @@
 package tests;
 
 import base.BaseTest;
+import dataproviders.DataProviders;
 import io.restassured.http.ContentType;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -85,5 +89,61 @@ public class PostRequestTest extends BaseTest {
 
         System.out.println(id);
 
+    }
+    @Test(dataProvider = "postData", dataProviderClass = DataProviders.class,
+            groups = {"api", "regression"})
+    public void createPostDataDrivenTest(String title, String body, int userId){
+
+        String requestBody = "{\n" +
+                "\"title\": \"" + title + "\",\n" +
+                "\"body\": \"" + body + "\",\n" +
+                "\"userId\": " + userId + "\n" +
+                "}";
+
+        given().spec(reqSpec)
+                .body(requestBody)
+                .when()
+                .post("/posts")
+                .then()
+                .statusCode(201)
+                .body("title", equalTo(title))
+                .body("userId", equalTo(userId))
+                .log().all();
+    }
+
+    @Test(dataProvider = "postJsonData", dataProviderClass = DataProviders.class, groups = {"api","regression"})
+    public void createPostJsonDriverTest(Map<String,Object> testData){
+        String requestBody = "{\n" +
+                "\"title\": \"" + testData.get("title") + "\",\n" +
+                "\"body\": \"" + testData.get("body") + "\",\n" +
+                "\"userId\": " + testData.get("userId") + "\n" +
+                "}";
+        given().spec(reqSpec)
+                .body(requestBody)
+                .when()
+                .post("/posts")
+                .then()
+                .statusCode(201)
+                .body("title",equalTo(testData.get("title").toString()))
+                .log().all();
+    }
+
+
+    @Test(dataProvider = "excelPostData", dataProviderClass = DataProviders.class, groups={"api","regression"})
+    public void createPostExcelDrivenTest(String title, String body, String userId ){
+        String requestBody = "{\n" +
+                "\"title\": \"" + title + "\",\n" +
+                "\"body\": \"" + body + "\",\n" +
+                "\"userId\": " + userId + "\n" +
+                "}";
+
+        given().spec(reqSpec)
+                .body(requestBody)
+                .when()
+                .post("/posts")
+                .then()
+                .statusCode(201)
+                .body("title", equalTo(title))
+                .log().all();
     }
 }
