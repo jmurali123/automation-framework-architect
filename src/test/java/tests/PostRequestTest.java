@@ -2,6 +2,7 @@ package tests;
 
 import base.BaseTest;
 import dataproviders.DataProviders;
+import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -12,8 +13,12 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
+@Epic("Post Management")
+@Feature("Create Post")
 public class PostRequestTest extends BaseTest {
     @Test(groups={"api", "sanity", "regression"})
+    @Story("Create post with valid data")
+    @Severity(SeverityLevel.NORMAL)
     public void createPostTest(){
         String requestBody = "{\n" +
                 "  \"title\": \"My First Post\",\n" +
@@ -33,6 +38,8 @@ public class PostRequestTest extends BaseTest {
     }
 
     @Test(groups={"api", "sanity", "regression"})
+    @Story("Create user with valid data")
+    @Severity(SeverityLevel.NORMAL)
     public void createUserTest(){
         String requestBody="{\n" +
                 "  \"name\": \"John Doe\",\n" +
@@ -52,6 +59,8 @@ public class PostRequestTest extends BaseTest {
     }
 
     @Test(groups={"api", "sanity", "regression"})
+    @Story("Validate created post ID")
+    @Severity(SeverityLevel.MINOR)
     public void createPostAndValidateIdTest(){
         String requestBody="{\n" +
                 "  \"name\": \"John Doe\",\n" +
@@ -70,6 +79,8 @@ public class PostRequestTest extends BaseTest {
     }
 
     @Test(groups={"api", "sanity", "regression"})
+    @Story("Create post with custom data")
+    @Severity(SeverityLevel.MINOR)
     public void createCustomPostTest(){
         String requestBody="{\n" +
                 "  \"title\": \"Murali\",\n" +
@@ -92,6 +103,8 @@ public class PostRequestTest extends BaseTest {
     }
     @Test(dataProvider = "postData", dataProviderClass = DataProviders.class,
             groups = {"api", "regression"})
+    @Story("Create post data driven")
+    @Severity(SeverityLevel.NORMAL)
     public void createPostDataDrivenTest(String title, String body, int userId){
 
         String requestBody = "{\n" +
@@ -112,6 +125,8 @@ public class PostRequestTest extends BaseTest {
     }
 
     @Test(dataProvider = "postJsonData", dataProviderClass = DataProviders.class, groups = {"api","regression"})
+    @Story("Create post JSON driven")
+    @Severity(SeverityLevel.NORMAL)
     public void createPostJsonDriverTest(Map<String,Object> testData){
         String requestBody = "{\n" +
                 "\"title\": \"" + testData.get("title") + "\",\n" +
@@ -130,6 +145,8 @@ public class PostRequestTest extends BaseTest {
 
 
     @Test(dataProvider = "excelPostData", dataProviderClass = DataProviders.class, groups={"api","regression"})
+    @Story("Create post Excel driven")
+    @Severity(SeverityLevel.NORMAL)
     public void createPostExcelDrivenTest(String title, String body, String userId ){
         String requestBody = "{\n" +
                 "\"title\": \"" + title + "\",\n" +

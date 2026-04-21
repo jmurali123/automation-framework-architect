@@ -1,14 +1,19 @@
 package tests;
 
 import base.BaseTest;
+import io.qameta.allure.*;
 import io.restassured.http.ContentType;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 
+@Epic("Post Management")
+@Feature("CRUD Operations")
 public class CrudFlowTest extends BaseTest {
     @Test(groups={"api", "sanity", "regression"})
+    @Story("Complete CRUD flow")
+    @Severity(SeverityLevel.CRITICAL)
     public void completeCrudFlowTest(){
         String requestBody = "{\n" +
                 "\"title\": \"John Doe\",\n" +
