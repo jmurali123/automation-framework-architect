@@ -4,7 +4,8 @@
     <listeners>
         <listener class-name="listeners.TestListener"/>
     </listeners>
-    <!-- Smoke Tests -->
+
+    <!-- API Tests -->
     <test name="Smoke Tests">
         <groups>
             <run>
@@ -12,11 +13,10 @@
             </run>
         </groups>
         <packages>
-            <package name="tests"/>
+            <package name="tests.api"/>
         </packages>
     </test>
 
-    <!-- Regression Tests -->
     <test name="Regression Tests">
         <groups>
             <run>
@@ -24,11 +24,10 @@
             </run>
         </groups>
         <packages>
-            <package name="tests"/>
+            <package name="tests.api"/>
         </packages>
     </test>
 
-    <!-- Sanity Tests -->
     <test name="Sanity Tests">
         <groups>
             <run>
@@ -36,7 +35,19 @@
             </run>
         </groups>
         <packages>
-            <package name="tests"/>
+            <package name="tests.api"/>
+        </packages>
+    </test>
+
+    <!-- UI Tests -->
+    <test name="UI Tests">
+        <groups>
+            <run>
+                <include name="ui"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.ui"/>
         </packages>
     </test>
 

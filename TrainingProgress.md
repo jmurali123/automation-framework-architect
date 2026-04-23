@@ -50,3 +50,15 @@
 - Static block — loads once into RAM
 - ClassLoader — finds resources automatically
 - Hard vs Soft assertions
+
+### Day 20 ✅
+- Lombok @Data annotation
+- Removed boilerplate getters/setters
+- @JsonIgnoreProperties(ignoreUnknown=true)
+- Maven scope=provided concept
+
+### Day 21 ✅
+- End to End CRUD test
+- POST → GET → PUT → DELETE flow
+- Allure @Step annotations
+- JSONPlaceholder limitation understanding
