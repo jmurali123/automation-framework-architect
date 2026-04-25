@@ -18,6 +18,7 @@ public class TestListener implements ITestListener {
         result.getMethod().setRetryAnalyzerClass( RetryAnalyzer.class);
         System.out.println("=================================");
         System.out.println("Test Started : " + result.getName());
+        System.out.println("Thread       : " + Thread.currentThread().getName()); // ← add this!
         System.out.println("Class        : " + result.getTestClass().getName());
     }
 

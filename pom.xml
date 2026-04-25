@@ -90,28 +90,76 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.12.0</version>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <env>${env}</env>
+                    </systemPropertyVariables>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.19/aspectjweaver-1.9.19.jar"
                     </argLine>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.12.0</version>
             </plugin>
         </plugins>
     </build>
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <suiteXmlFile>testng.xml</suiteXmlFile>
+        <env>dev</env>
     </properties>
+    <profiles>
+
+        <profile>
+            <id>smoke</id>
+            <properties>
+                <suiteXmlFile>testng-smoke.xml</suiteXmlFile>
+                <env>dev</env>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>api</id>
+            <properties>
+                <suiteXmlFile>testng-api.xml</suiteXmlFile>
+                <env>dev</env>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>ui</id>
+            <properties>
+                <suiteXmlFile>testng-ui.xml</suiteXmlFile>
+                <env>dev</env>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>regression</id>
+            <properties>
+                <suiteXmlFile>testng-regression.xml</suiteXmlFile>
+                <env>dev</env>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>staging</id>
+            <properties>
+                <suiteXmlFile>testng.xml</suiteXmlFile>
+                <env>staging</env>
+            </properties>
+        </profile>
+
+    </profiles>
 
 </project>

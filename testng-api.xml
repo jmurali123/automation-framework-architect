@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API Suite" parallel="methods" thread-count="5">
+
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+
+    <test name="API Tests">
+        <groups>
+            <run>
+                <include name="api"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.api"/>
+        </packages>
+    </test>
+
+</suite>

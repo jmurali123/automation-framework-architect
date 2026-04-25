@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Smoke Suite" parallel="tests" thread-count="2">  ← here!
+
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+
+    <test name="API Smoke">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.api"/>
+        </packages>
+    </test>
+
+    <test name="UI Smoke">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.ui"/>
+        </packages>
+    </test>
+
+</suite>
