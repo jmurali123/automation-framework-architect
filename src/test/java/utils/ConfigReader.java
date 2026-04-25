@@ -1,7 +1,9 @@
 package utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 public class ConfigReader {
@@ -16,6 +18,27 @@ public class ConfigReader {
 
         // Load env specific — overrides common!
         loadFile("config-" + env + ".properties");
+        loadAllFiles("testdata");
+    }
+
+    private static void loadAllFiles(String folderName){
+        try {
+            URL folderUrl = ConfigReader.class
+                    .getClassLoader()
+                    .getResource(folderName);
+
+            if(folderUrl == null) return;
+
+            File folder = new File(folderUrl.getPath());
+
+            for(File file : folder.listFiles()){
+                if(file.getName().endsWith(".properties")){
+                    loadFile(folderName + "/" + file.getName());
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static void loadFile(String fileName){

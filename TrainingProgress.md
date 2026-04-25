@@ -76,3 +76,15 @@
 - LocatorReader — external locators
 - Multi-environment config
 - LoginPage + LoginTest
+
+### Day 24 ✅
+- Screenshot on failure in TestListener
+- ProductPage created
+- NavigationBar custom component
+- BaseComponent with wait methods
+- All HTML components extended BaseComponent
+- DriverManager ThreadLocal
+- LocatorReader dynamic params
+- Multi-environment config
+- Chrome options — password popup disabled
+- deleteAllCookies — clean state per test
