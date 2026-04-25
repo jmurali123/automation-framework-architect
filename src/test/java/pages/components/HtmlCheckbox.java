@@ -1,41 +1,24 @@
 package pages.components;
 
-import utils.DriverManager;
-import utils.LocatorReader;
-
-public class HtmlCheckbox {
-
-    private String locatorKey;
+public class HtmlCheckbox extends BaseComponent {
 
     public HtmlCheckbox(String locatorKey){
-        this.locatorKey = locatorKey;
+        super(locatorKey);
     }
 
     public void check(){
         if(!isChecked()){
-            DriverManager.getDriver()
-                    .findElement(LocatorReader.get(locatorKey))
-                    .click();
+            waitForClickability().click();
         }
     }
 
     public void uncheck(){
         if(isChecked()){
-            DriverManager.getDriver()
-                    .findElement(LocatorReader.get(locatorKey))
-                    .click();
+            waitForClickability().click();
         }
     }
 
     public boolean isChecked(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .isSelected();
-    }
-
-    public boolean isDisplayed(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .isDisplayed();
+        return waitForVisibility().isSelected();
     }
 }

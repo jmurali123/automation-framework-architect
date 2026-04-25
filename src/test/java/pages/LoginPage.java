@@ -1,6 +1,7 @@
 package pages;
 
 import annotations.FindByLocator;
+import base.BaseUITest;
 import decorators.CustomFieldDecorator;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -25,9 +26,7 @@ public class LoginPage {
 
     public LoginPage(){
         PageFactory.initElements(
-                new CustomFieldDecorator(
-                        new AjaxElementLocatorFactory(
-                                DriverManager.getDriver(), 10)),
+                new CustomFieldDecorator(BaseUITest.getLocatorFactory()),
                 this);
     }
 
@@ -55,5 +54,9 @@ public class LoginPage {
 
     public boolean isErrorDisplayed(){
         return errorMessage.isDisplayed();
+    }
+
+    public boolean isLoginButtonDisplayed(){
+        return loginButton.isDisplayed();
     }
 }

@@ -1,42 +1,21 @@
 package pages.components;
 
-import org.openqa.selenium.By;
-import utils.DriverManager;
-import utils.LocatorReader;
-
-public class HtmlInput {
-
-    private String locatorKey;
+public class HtmlInput extends BaseComponent {
 
     public HtmlInput(String locatorKey){
-        this.locatorKey = locatorKey;
+        super(locatorKey);
     }
 
     public void enterText(String text){
-        By locator = LocatorReader.get(locatorKey);
-        DriverManager.getDriver()
-                .findElement(locator)
-                .clear();
-        DriverManager.getDriver()
-                .findElement(locator)
-                .sendKeys(text);
+        waitForVisibility().clear();
+        waitForVisibility().sendKeys(text);
     }
 
     public String getValue(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .getAttribute("value");
-    }
-
-    public boolean isDisplayed(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .isDisplayed();
+        return waitForVisibility().getAttribute("value");
     }
 
     public void clear(){
-        DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .clear();
+        waitForVisibility().clear();
     }
 }

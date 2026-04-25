@@ -7,15 +7,13 @@ import utils.LocatorReader;
 
 import java.util.List;
 
-public class HtmlTable {
-
-    private String locatorKey;
+public class HtmlTable extends BaseComponent {
 
     // Optional search component!
     public HtmlInput search;
 
     public HtmlTable(String locatorKey){
-        this.locatorKey = locatorKey;
+        super(locatorKey);
     }
 
     public int getRowCount(){
@@ -44,12 +42,6 @@ public class HtmlTable {
         return DriverManager.getDriver()
                 .findElements(By.xpath(
                         getTableXpath() + "//tbody/tr"));
-    }
-
-    public boolean isDisplayed(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .isDisplayed();
     }
 
     private String getTableXpath(){

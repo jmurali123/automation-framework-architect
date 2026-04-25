@@ -62,3 +62,17 @@
 - POST → GET → PUT → DELETE flow
 - Allure @Step annotations
 - JSONPlaceholder limitation understanding
+### Day 22 ✅
+- Selenium Setup + WebDriverManager
+- BaseUITest — browser lifecycle
+- DriverManager — ThreadLocal WebDriver
+- tests.api and tests.ui package structure
+
+### Day 23 ✅
+- Page Object Model
+- Custom HTML Components
+- @FindByLocator annotation
+- CustomFieldDecorator
+- LocatorReader — external locators
+- Multi-environment config
+- LoginPage + LoginTest

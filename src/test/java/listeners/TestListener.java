@@ -1,9 +1,17 @@
 package listeners;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import utils.DriverManager;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class TestListener implements ITestListener {
+
 
     @Override
     public void onTestStart(ITestResult result){
@@ -28,6 +36,26 @@ public class TestListener implements ITestListener {
         System.out.println("Duration     : " + duration + "ms");
         System.out.println("Reason       : " + result.getThrowable().getMessage());
         System.out.println("=================================");
+
+        // Take screenshot if WebDriver is available!
+        if(DriverManager.getDriver() != null){
+            takeScreenshot(result.getName());
+        }
+    }
+
+    private void takeScreenshot(String testName){
+        try {
+            TakesScreenshot ts = (TakesScreenshot) DriverManager.getDriver();
+            File source = ts.getScreenshotAs(OutputType.FILE);
+            String destination = "target/screenshots/" + testName + "_"
+                    + System.currentTimeMillis() + ".png";
+            File finalDestination = new File(destination);
+            finalDestination.getParentFile().mkdirs();
+            Files.copy(source.toPath(), finalDestination.toPath());
+            System.out.println("Screenshot saved: " + destination);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

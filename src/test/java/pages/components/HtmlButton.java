@@ -1,38 +1,33 @@
 package pages.components;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.interactions.Actions;
 import utils.DriverManager;
-import utils.LocatorReader;
 
-public class HtmlButton {
-
-    private String locatorKey;
+public class HtmlButton extends BaseComponent {
 
     public HtmlButton(String locatorKey){
-        this.locatorKey = locatorKey;
+        super(locatorKey);
     }
 
     public void click(){
-        DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .click();
+        waitForClickability().click();
     }
 
-    public boolean isEnabled(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .isEnabled();
+    public void doubleClick(){
+        Actions actions = new Actions(DriverManager.getDriver());
+        actions.doubleClick(waitForClickability()).perform();
     }
 
-    public boolean isDisplayed(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .isDisplayed();
+    public void hover(){
+        Actions actions = new Actions(DriverManager.getDriver());
+        actions.moveToElement(waitForVisibility()).perform();
     }
 
     public String getText(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .getText();
+        return waitForVisibility().getText();
+    }
+
+    public boolean isEnabled(){
+        return waitForVisibility().isEnabled();
     }
 }

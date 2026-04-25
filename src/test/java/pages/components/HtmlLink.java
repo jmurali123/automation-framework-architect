@@ -1,37 +1,20 @@
 package pages.components;
 
-import utils.DriverManager;
-import utils.LocatorReader;
-
-public class HtmlLink {
-
-    private String locatorKey;
+public class HtmlLink extends BaseComponent {
 
     public HtmlLink(String locatorKey){
-        this.locatorKey = locatorKey;
+        super(locatorKey);
     }
 
     public void click(){
-        DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .click();
+        waitForClickability().click();
     }
 
     public String getText(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .getText();
+        return waitForVisibility().getText();
     }
 
     public String getHref(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .getAttribute("href");
-    }
-
-    public boolean isDisplayed(){
-        return DriverManager.getDriver()
-                .findElement(LocatorReader.get(locatorKey))
-                .isDisplayed();
+        return waitForVisibility().getAttribute("href");
     }
 }

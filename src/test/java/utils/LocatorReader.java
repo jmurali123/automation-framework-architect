@@ -43,8 +43,21 @@ public class LocatorReader {
         }
     }
 
+    // Existing method — no params
     public static By get(String key){
         String value = properties.getProperty(key);
+        return parseLocator(value);
+    }
+
+    // New method — with dynamic params!
+    public static By get(String key, String... params){
+        String value = properties.getProperty(key);
+
+        // Replace placeholders with actual values!
+        for(int i = 0; i < params.length; i++){
+            value = value.replace("{" + i + "}", params[i]);
+        }
+
         return parseLocator(value);
     }
 
