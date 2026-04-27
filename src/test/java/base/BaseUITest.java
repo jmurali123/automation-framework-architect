@@ -21,15 +21,21 @@ public class BaseUITest {
 
     @BeforeClass(alwaysRun = true)
     public void setUpBrowser(){
-        System.out.println("=== Opening browser ===");
-        String url = ConfigReader.get("saucedemo.base.url");
-        System.out.println("URL from config: " + url);
         String browser = ConfigReader.get("browser");
 
         if(browser.equalsIgnoreCase("chrome")){
             ChromeOptions options = new ChromeOptions();
 
-// Disable password manager popup completely!
+            // Headless for CI/CD!
+            if(System.getenv("CI") != null){
+                options.addArguments("--headless");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--window-size=1920,1080");
+            }
+
+            // Disable password manager
             options.addArguments("--disable-save-password-bubble");
             options.addArguments("--disable-features=PasswordManagerEnabled");
             options.addArguments("--password-store=basic");
@@ -44,17 +50,16 @@ public class BaseUITest {
             options.setExperimentalOption("excludeSwitches",
                     Arrays.asList("enable-automation"));
 
-
             WebDriverManager.chromedriver().setup();
             DriverManager.setDriver(new ChromeDriver(options));
+
         } else if(browser.equalsIgnoreCase("firefox")){
             FirefoxOptions firefoxOptions = new FirefoxOptions();
-
-            // Disable password manager popup!
-            firefoxOptions.addPreference(
-                    "signon.rememberSignons", false);
-            firefoxOptions.addPreference(
-                    "signon.autofillForms", false);
+            if(System.getenv("CI") != null){
+                firefoxOptions.addArguments("--headless");
+            }
+            firefoxOptions.addPreference("signon.rememberSignons", false);
+            firefoxOptions.addPreference("signon.autofillForms", false);
             WebDriverManager.firefoxdriver().setup();
             DriverManager.setDriver(new FirefoxDriver(firefoxOptions));
         }
@@ -62,8 +67,6 @@ public class BaseUITest {
         DriverManager.getDriver().manage().window().maximize();
         DriverManager.getDriver().get(
                 ConfigReader.get("saucedemo.base.url"));
-
-        System.out.println("=== Browser opened ===");
     }
 
     @BeforeMethod(alwaysRun = true)
