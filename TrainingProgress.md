@@ -88,3 +88,12 @@
 - Multi-environment config
 - Chrome options — password popup disabled
 - deleteAllCookies — clean state per test
+
+### Day 26 ✅
+- Maven Profiles — smoke, api, ui, regression, staging
+- Separate testng XML files per profile
+- Surefire plugin with ${suiteXmlFile}
+- systemPropertyVariables for env
+- parallel="tests" for smoke and regression
+- parallel="methods" for API
+- Thread name verification
