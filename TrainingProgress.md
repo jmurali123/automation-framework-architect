@@ -97,3 +97,12 @@
 - parallel="tests" for smoke and regression
 - parallel="methods" for API
 - Thread name verification
+
+### Day 28 ✅
+- Git Branching Strategy — GitFlow
+- main branch — production ready
+- develop branch — integration
+- feature branches — new features
+- release branches — release preparation
+- hotfix branches — urgent fixes
+- .gitattributes — line ending fix
