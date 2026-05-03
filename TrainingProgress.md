@@ -106,3 +106,13 @@
 - release branches — release preparation
 - hotfix branches — urgent fixes
 - .gitattributes — line ending fix
+
+### Day 29 ✅
+- GitHub Actions CI Pipeline
+- ci.yml workflow created
+- Smoke tests run on PR and push
+- Headless Chrome for CI
+- Allure report uploaded as artifact
+- Screenshots on failure
+- GitFlow with PRs working
+- Pipeline runs in ~57 seconds!
