@@ -1,0 +1,34 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Cross Browser Suite"
+       parallel="tests"
+       thread-count="2">
+
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+    </listeners>
+
+    <test name="Chrome Tests">
+        <parameter name="browser" value="chrome"/>
+        <groups>
+            <run>
+                <include name="ui"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.ui"/>
+        </packages>
+    </test>
+
+    <test name="Firefox Tests">
+        <parameter name="browser" value="firefox"/>
+        <groups>
+            <run>
+                <include name="ui"/>
+            </run>
+        </groups>
+        <packages>
+            <package name="tests.ui"/>
+        </packages>
+    </test>
+
+</suite>
